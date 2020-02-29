@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.TbUserPictureMapper">
+  <resultMap id="BaseResultMap" type="com.demo.entity.TbUserPicture">
+    <id column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="u_uid" jdbcType="BIGINT" property="uUid" />
+    <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
+    <result column="uploadTime" jdbcType="TIMESTAMP" property="uploadtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    uid, u_uid, pic_url, uploadTime
+  </sql>
+  <select id="selectByExample" parameterType="com.ssm.po.TbUserPictureExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_user_picture
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user_picture
+    where uid = #{uid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_user_picture
+    where uid = #{uid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ssm.po.TbUserPictureExample">
+    delete from tb_user_picture
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ssm.po.TbUserPicture">
+    insert into tb_user_picture (uid, u_uid, pic_url, 
+      uploadTime)
+    values (#{uid,jdbcType=BIGINT}, #{uUid,jdbcType=BIGINT}, #{picUrl,jdbcType=VARCHAR}, 
+      #{uploadtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.po.TbUserPicture">
+    insert into tb_user_picture
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="uUid != null">
+        u_uid,
+      </if>
+      <if test="picUrl != null">
+        pic_url,
+      </if>
+      <if test="uploadtime != null">
+        uploadTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="uUid != null">
+        #{uUid,jdbcType=BIGINT},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null">
+        #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ssm.po.TbUserPictureExample" resultType="java.lang.Integer">
+    select count(*) from tb_user_picture
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_user_picture
+    <set>
+      <if test="record.uid != null">
+        uid = #{record.uid,jdbcType=BIGINT},
+      </if>
+      <if test="record.uUid != null">
+        u_uid = #{record.uUid,jdbcType=BIGINT},
+      </if>
+      <if test="record.picUrl != null">
+        pic_url = #{record.picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uploadtime != null">
+        uploadTime = #{record.uploadtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_user_picture
+    set uid = #{record.uid,jdbcType=BIGINT},
+      u_uid = #{record.uUid,jdbcType=BIGINT},
+      pic_url = #{record.picUrl,jdbcType=VARCHAR},
+      uploadTime = #{record.uploadtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.po.TbUserPicture">
+    update tb_user_picture
+    <set>
+      <if test="uUid != null">
+        u_uid = #{uUid,jdbcType=BIGINT},
+      </if>
+      <if test="picUrl != null">
+        pic_url = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null">
+        uploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.po.TbUserPicture">
+    update tb_user_picture
+    set u_uid = #{uUid,jdbcType=BIGINT},
+      pic_url = #{picUrl,jdbcType=VARCHAR},
+      uploadTime = #{uploadtime,jdbcType=TIMESTAMP}
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+</mapper>

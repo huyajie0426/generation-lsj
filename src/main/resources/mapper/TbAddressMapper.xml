@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.TbAddressMapper">
+  <resultMap id="BaseResultMap" type="com.demo.entity.TbAddress">
+    <id column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="u_uid" jdbcType="BIGINT" property="uUid" />
+    <result column="add_recipient" jdbcType="VARCHAR" property="addRecipient" />
+    <result column="add_phone" jdbcType="VARCHAR" property="addPhone" />
+    <result column="add_province" jdbcType="VARCHAR" property="addProvince" />
+    <result column="add_city" jdbcType="VARCHAR" property="addCity" />
+    <result column="add_country" jdbcType="VARCHAR" property="addCountry" />
+    <result column="add_info" jdbcType="VARCHAR" property="addInfo" />
+    <result column="add_default" jdbcType="INTEGER" property="addDefault" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    uid, u_uid, add_recipient, add_phone, add_province, add_city, add_country, add_info, 
+    add_default
+  </sql>
+  <select id="selectByExample" parameterType="com.ssm.po.TbAddressExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_address
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_address
+    where uid = #{uid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_address
+    where uid = #{uid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ssm.po.TbAddressExample">
+    delete from tb_address
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ssm.po.TbAddress">
+    insert into tb_address (uid, u_uid, add_recipient, 
+      add_phone, add_province, add_city, 
+      add_country, add_info, add_default
+      )
+    values (#{uid,jdbcType=BIGINT}, #{uUid,jdbcType=BIGINT}, #{addRecipient,jdbcType=VARCHAR}, 
+      #{addPhone,jdbcType=VARCHAR}, #{addProvince,jdbcType=VARCHAR}, #{addCity,jdbcType=VARCHAR}, 
+      #{addCountry,jdbcType=VARCHAR}, #{addInfo,jdbcType=VARCHAR}, #{addDefault,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.po.TbAddress">
+    insert into tb_address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="uUid != null">
+        u_uid,
+      </if>
+      <if test="addRecipient != null">
+        add_recipient,
+      </if>
+      <if test="addPhone != null">
+        add_phone,
+      </if>
+      <if test="addProvince != null">
+        add_province,
+      </if>
+      <if test="addCity != null">
+        add_city,
+      </if>
+      <if test="addCountry != null">
+        add_country,
+      </if>
+      <if test="addInfo != null">
+        add_info,
+      </if>
+      <if test="addDefault != null">
+        add_default,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="uUid != null">
+        #{uUid,jdbcType=BIGINT},
+      </if>
+      <if test="addRecipient != null">
+        #{addRecipient,jdbcType=VARCHAR},
+      </if>
+      <if test="addPhone != null">
+        #{addPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="addProvince != null">
+        #{addProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="addCity != null">
+        #{addCity,jdbcType=VARCHAR},
+      </if>
+      <if test="addCountry != null">
+        #{addCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="addInfo != null">
+        #{addInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="addDefault != null">
+        #{addDefault,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ssm.po.TbAddressExample" resultType="java.lang.Integer">
+    select count(*) from tb_address
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_address
+    <set>
+      <if test="record.uid != null">
+        uid = #{record.uid,jdbcType=BIGINT},
+      </if>
+      <if test="record.uUid != null">
+        u_uid = #{record.uUid,jdbcType=BIGINT},
+      </if>
+      <if test="record.addRecipient != null">
+        add_recipient = #{record.addRecipient,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addPhone != null">
+        add_phone = #{record.addPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addProvince != null">
+        add_province = #{record.addProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addCity != null">
+        add_city = #{record.addCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addCountry != null">
+        add_country = #{record.addCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addInfo != null">
+        add_info = #{record.addInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addDefault != null">
+        add_default = #{record.addDefault,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_address
+    set uid = #{record.uid,jdbcType=BIGINT},
+      u_uid = #{record.uUid,jdbcType=BIGINT},
+      add_recipient = #{record.addRecipient,jdbcType=VARCHAR},
+      add_phone = #{record.addPhone,jdbcType=VARCHAR},
+      add_province = #{record.addProvince,jdbcType=VARCHAR},
+      add_city = #{record.addCity,jdbcType=VARCHAR},
+      add_country = #{record.addCountry,jdbcType=VARCHAR},
+      add_info = #{record.addInfo,jdbcType=VARCHAR},
+      add_default = #{record.addDefault,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.po.TbAddress">
+    update tb_address
+    <set>
+      <if test="uUid != null">
+        u_uid = #{uUid,jdbcType=BIGINT},
+      </if>
+      <if test="addRecipient != null">
+        add_recipient = #{addRecipient,jdbcType=VARCHAR},
+      </if>
+      <if test="addPhone != null">
+        add_phone = #{addPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="addProvince != null">
+        add_province = #{addProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="addCity != null">
+        add_city = #{addCity,jdbcType=VARCHAR},
+      </if>
+      <if test="addCountry != null">
+        add_country = #{addCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="addInfo != null">
+        add_info = #{addInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="addDefault != null">
+        add_default = #{addDefault,jdbcType=INTEGER},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.po.TbAddress">
+    update tb_address
+    set u_uid = #{uUid,jdbcType=BIGINT},
+      add_recipient = #{addRecipient,jdbcType=VARCHAR},
+      add_phone = #{addPhone,jdbcType=VARCHAR},
+      add_province = #{addProvince,jdbcType=VARCHAR},
+      add_city = #{addCity,jdbcType=VARCHAR},
+      add_country = #{addCountry,jdbcType=VARCHAR},
+      add_info = #{addInfo,jdbcType=VARCHAR},
+      add_default = #{addDefault,jdbcType=INTEGER}
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+</mapper>
