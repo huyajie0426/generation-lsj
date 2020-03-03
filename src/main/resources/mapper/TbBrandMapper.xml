@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.demo.dao.TbBrandMapper">
-  <resultMap id="BaseResultMap" type="com.demo.entity.TbBrand">
+<mapper namespace="com.lsj.dao.TbBrandMapper">
+  <resultMap id="BaseResultMap" type="com.lsj.entity.TbBrand">
     <id column="uid" jdbcType="BIGINT" property="uid" />
     <result column="b_name" jdbcType="VARCHAR" property="bName" />
     <result column="b_insTime" jdbcType="TIMESTAMP" property="bInstime" />

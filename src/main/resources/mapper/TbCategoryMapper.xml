@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.demo.dao.TbCategoryMapper">
-  <resultMap id="BaseResultMap" type="com.demo.entity.TbCategory">
+<mapper namespace="com.lsj.dao.TbCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.lsj.entity.TbCategory">
     <id column="uid" jdbcType="BIGINT" property="uid" />
     <result column="c_name" jdbcType="VARCHAR" property="cName" />
     <result column="c_insTime" jdbcType="TIMESTAMP" property="cInstime" />

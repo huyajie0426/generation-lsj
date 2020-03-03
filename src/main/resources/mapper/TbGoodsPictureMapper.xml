@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.demo.dao.TbGoodsPictureMapper">
-  <resultMap id="BaseResultMap" type="com.demo.entity.TbGoodsPicture">
+<mapper namespace="com.lsj.dao.TbGoodsPictureMapper">
+  <resultMap id="BaseResultMap" type="com.lsj.entity.TbGoodsPicture">
     <id column="uid" jdbcType="BIGINT" property="uid" />
     <result column="g_uid" jdbcType="BIGINT" property="gUid" />
     <result column="gp_url" jdbcType="VARCHAR" property="gpUrl" />

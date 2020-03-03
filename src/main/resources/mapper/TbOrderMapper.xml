@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.demo.dao.TbOrderMapper">
-  <resultMap id="BaseResultMap" type="com.demo.entity.TbOrder">
+<mapper namespace="com.lsj.dao.TbOrderMapper">
+  <resultMap id="BaseResultMap" type="com.lsj.entity.TbOrder">
     <id column="uid" jdbcType="BIGINT" property="uid" />
     <result column="o_uuid" jdbcType="VARCHAR" property="oUuid" />
     <result column="g_uid" jdbcType="BIGINT" property="gUid" />

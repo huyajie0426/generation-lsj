@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.demo.dao.TbAdminMapper">
-  <resultMap id="BaseResultMap" type="com.demo.entity.TbAdmin">
+<mapper namespace="com.lsj.dao.TbAdminMapper">
+  <resultMap id="BaseResultMap" type="com.lsj.entity.TbAdmin">
     <id column="uid" jdbcType="BIGINT" property="uid" />
     <result column="ad_account" jdbcType="VARCHAR" property="adAccount" />
     <result column="ad_pwd" jdbcType="VARCHAR" property="adPwd" />
