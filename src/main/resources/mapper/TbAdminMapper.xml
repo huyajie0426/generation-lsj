@@ -8,81 +8,11 @@
     <result column="ad_phone" jdbcType="VARCHAR" property="adPhone" />
     <result column="ad_registTime" jdbcType="TIMESTAMP" property="adRegisttime" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
+  
   <sql id="Base_Column_List">
     uid, ad_account, ad_pwd, ad_phone, ad_registTime
   </sql>
-  <select id="selectByExample" parameterType="com.ssm.po.TbAdminExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from tb_admin
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -93,19 +23,14 @@
     delete from tb_admin
     where uid = #{uid,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ssm.po.TbAdminExample">
-    delete from tb_admin
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.ssm.po.TbAdmin">
+
+  <insert id="insert" parameterType="com.lsj.entity.TbAdmin">
     insert into tb_admin (uid, ad_account, ad_pwd, 
       ad_phone, ad_registTime)
     values (#{uid,jdbcType=BIGINT}, #{adAccount,jdbcType=VARCHAR}, #{adPwd,jdbcType=VARCHAR}, 
       #{adPhone,jdbcType=VARCHAR}, #{adRegisttime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.ssm.po.TbAdmin">
+  <insert id="insertSelective" parameterType="com.lsj.entity.TbAdmin">
     insert into tb_admin
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uid != null">
@@ -142,47 +67,10 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ssm.po.TbAdminExample" resultType="java.lang.Integer">
-    select count(*) from tb_admin
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update tb_admin
-    <set>
-      <if test="record.uid != null">
-        uid = #{record.uid,jdbcType=BIGINT},
-      </if>
-      <if test="record.adAccount != null">
-        ad_account = #{record.adAccount,jdbcType=VARCHAR},
-      </if>
-      <if test="record.adPwd != null">
-        ad_pwd = #{record.adPwd,jdbcType=VARCHAR},
-      </if>
-      <if test="record.adPhone != null">
-        ad_phone = #{record.adPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="record.adRegisttime != null">
-        ad_registTime = #{record.adRegisttime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update tb_admin
-    set uid = #{record.uid,jdbcType=BIGINT},
-      ad_account = #{record.adAccount,jdbcType=VARCHAR},
-      ad_pwd = #{record.adPwd,jdbcType=VARCHAR},
-      ad_phone = #{record.adPhone,jdbcType=VARCHAR},
-      ad_registTime = #{record.adRegisttime,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.po.TbAdmin">
+ 
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.lsj.entity.TbAdmin">
     update tb_admin
     <set>
       <if test="adAccount != null">
@@ -200,7 +88,7 @@
     </set>
     where uid = #{uid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ssm.po.TbAdmin">
+  <update id="updateByPrimaryKey" parameterType="com.lsj.entity.TbAdmin">
     update tb_admin
     set ad_account = #{adAccount,jdbcType=VARCHAR},
       ad_pwd = #{adPwd,jdbcType=VARCHAR},

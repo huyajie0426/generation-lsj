@@ -8,81 +8,11 @@
     <result column="g_amount" jdbcType="DECIMAL" property="gAmount" />
     <result column="g_discount" jdbcType="DECIMAL" property="gDiscount" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
+  
   <sql id="Base_Column_List">
     uid, s_uid, g_name, g_amount, g_discount
   </sql>
-  <select id="selectByExample" parameterType="com.ssm.po.TbGoodsExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from tb_goods
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -93,19 +23,14 @@
     delete from tb_goods
     where uid = #{uid,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ssm.po.TbGoodsExample">
-    delete from tb_goods
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.ssm.po.TbGoods">
+
+  <insert id="insert" parameterType="com.lsj.entity.TbGoods">
     insert into tb_goods (uid, s_uid, g_name, 
       g_amount, g_discount)
     values (#{uid,jdbcType=BIGINT}, #{sUid,jdbcType=INTEGER}, #{gName,jdbcType=VARCHAR}, 
       #{gAmount,jdbcType=DECIMAL}, #{gDiscount,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="com.ssm.po.TbGoods">
+  <insert id="insertSelective" parameterType="com.lsj.entity.TbGoods">
     insert into tb_goods
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uid != null">
@@ -142,47 +67,10 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ssm.po.TbGoodsExample" resultType="java.lang.Integer">
-    select count(*) from tb_goods
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update tb_goods
-    <set>
-      <if test="record.uid != null">
-        uid = #{record.uid,jdbcType=BIGINT},
-      </if>
-      <if test="record.sUid != null">
-        s_uid = #{record.sUid,jdbcType=INTEGER},
-      </if>
-      <if test="record.gName != null">
-        g_name = #{record.gName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.gAmount != null">
-        g_amount = #{record.gAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="record.gDiscount != null">
-        g_discount = #{record.gDiscount,jdbcType=DECIMAL},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update tb_goods
-    set uid = #{record.uid,jdbcType=BIGINT},
-      s_uid = #{record.sUid,jdbcType=INTEGER},
-      g_name = #{record.gName,jdbcType=VARCHAR},
-      g_amount = #{record.gAmount,jdbcType=DECIMAL},
-      g_discount = #{record.gDiscount,jdbcType=DECIMAL}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.po.TbGoods">
+
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.lsj.entity.TbGoods">
     update tb_goods
     <set>
       <if test="sUid != null">
@@ -200,7 +88,7 @@
     </set>
     where uid = #{uid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ssm.po.TbGoods">
+  <update id="updateByPrimaryKey" parameterType="com.lsj.entity.TbGoods">
     update tb_goods
     set s_uid = #{sUid,jdbcType=INTEGER},
       g_name = #{gName,jdbcType=VARCHAR},

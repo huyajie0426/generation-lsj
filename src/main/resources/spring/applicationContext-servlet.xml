@@ -19,10 +19,10 @@
 
     <!--静态资源映射-->
     <!--本项目把静态资源放在了webapp的statics目录下，资源映射如下-->
-    <mvc:resources mapping="/css/**" location="/statics/css/"/>
+    <!-- <mvc:resources mapping="/css/**" location="/statics/css/"/>
     <mvc:resources mapping="/js/**" location="/statics/js/"/>
     <mvc:resources mapping="/fonts/**" location="/statics/fonts/"/>
-    <mvc:resources mapping="/images/**" location="/statics/images/"/>
+    <mvc:resources mapping="/images/**" location="/statics/images/"/> -->
     <mvc:default-servlet-handler />  <!--这句要加上，要不然可能会访问不到静态资源，具体作用自行百度-->
 
     <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀(如果最后一个还是表示文件夹,则最后的斜杠不要漏了) 使用JSP-->

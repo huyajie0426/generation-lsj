@@ -11,81 +11,11 @@
     <result column="s_insTime" jdbcType="TIMESTAMP" property="sInstime" />
     <result column="s_uptTime" jdbcType="TIMESTAMP" property="sUpttime" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
+  
   <sql id="Base_Column_List">
     uid, c_uid, b_uid, s_name, s_count, s_onSale, s_insTime, s_uptTime
   </sql>
-  <select id="selectByExample" parameterType="com.ssm.po.TbStockExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from tb_stock
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -96,13 +26,8 @@
     delete from tb_stock
     where uid = #{uid,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ssm.po.TbStockExample">
-    delete from tb_stock
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.ssm.po.TbStock">
+
+  <insert id="insert" parameterType="com.lsj.entity.TbStock">
     insert into tb_stock (uid, c_uid, b_uid, 
       s_name, s_count, s_onSale, 
       s_insTime, s_uptTime)
@@ -110,7 +35,7 @@
       #{sName,jdbcType=VARCHAR}, #{sCount,jdbcType=BIGINT}, #{sOnsale,jdbcType=INTEGER}, 
       #{sInstime,jdbcType=TIMESTAMP}, #{sUpttime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.ssm.po.TbStock">
+  <insert id="insertSelective" parameterType="com.lsj.entity.TbStock">
     insert into tb_stock
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uid != null">
@@ -165,59 +90,10 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ssm.po.TbStockExample" resultType="java.lang.Integer">
-    select count(*) from tb_stock
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update tb_stock
-    <set>
-      <if test="record.uid != null">
-        uid = #{record.uid,jdbcType=BIGINT},
-      </if>
-      <if test="record.cUid != null">
-        c_uid = #{record.cUid,jdbcType=BIGINT},
-      </if>
-      <if test="record.bUid != null">
-        b_uid = #{record.bUid,jdbcType=BIGINT},
-      </if>
-      <if test="record.sName != null">
-        s_name = #{record.sName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sCount != null">
-        s_count = #{record.sCount,jdbcType=BIGINT},
-      </if>
-      <if test="record.sOnsale != null">
-        s_onSale = #{record.sOnsale,jdbcType=INTEGER},
-      </if>
-      <if test="record.sInstime != null">
-        s_insTime = #{record.sInstime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.sUpttime != null">
-        s_uptTime = #{record.sUpttime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update tb_stock
-    set uid = #{record.uid,jdbcType=BIGINT},
-      c_uid = #{record.cUid,jdbcType=BIGINT},
-      b_uid = #{record.bUid,jdbcType=BIGINT},
-      s_name = #{record.sName,jdbcType=VARCHAR},
-      s_count = #{record.sCount,jdbcType=BIGINT},
-      s_onSale = #{record.sOnsale,jdbcType=INTEGER},
-      s_insTime = #{record.sInstime,jdbcType=TIMESTAMP},
-      s_uptTime = #{record.sUpttime,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.po.TbStock">
+
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.lsj.entity.TbStock">
     update tb_stock
     <set>
       <if test="cUid != null">
@@ -244,7 +120,7 @@
     </set>
     where uid = #{uid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ssm.po.TbStock">
+  <update id="updateByPrimaryKey" parameterType="com.lsj.entity.TbStock">
     update tb_stock
     set c_uid = #{cUid,jdbcType=BIGINT},
       b_uid = #{bUid,jdbcType=BIGINT},
