@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.lsj.controller;
 
 import org.springframework.stereotype.Controller;
@@ -82,3 +83,20 @@ public class TbUserController {
 	}
 	
 }
+=======
+package com.lsj.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping(value="/user")
+public class TbUserController {
+	
+	@RequestMapping(value="/index")
+	public String goIndex() {
+		return "index";
+	}
+	
+}
+>>>>>>> branch 'master' of https://github.com/huyajie0426/generation-lsj.git
